@@ -40,7 +40,6 @@ Playbook for ICPC (Chico State ACM chapter)
     1. Reading Input **- 22**
 
 
-\pagebreak
 
 ## Environment
 ### **.vimrc** Settings
@@ -138,8 +137,6 @@ def findLCA(root, n1, n2):
     # Otherwise check if left subtree or right subtree is LCA
     return left_lca if left_lca is not None else right_lca
 ```
-
-\pagebreak
 
 
 ### Graphs

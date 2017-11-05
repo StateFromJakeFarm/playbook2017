@@ -561,7 +561,86 @@ def BFSEK(E, C, s, t, F, P, M, BFSq):
 Computes the minimum edge cut on a given graph based on the Stoer Wagner algorithm.
 
 ```py
+import sys
 
+def sum_into_A(G, A, u):
+    total = 0
+    for v in G[u].keys():
+        if v in A:
+            total += G[u][v]
+
+    return total
+
+def merge(G, u, v):
+    # Merge v into u
+    for q in G[v].keys():
+        if q == u:
+            # Remove existing edge from u to v
+            del G[u][v]
+        elif q in G[u].keys():
+            # Combine common edge between v and u
+            G[u][q] += G[v][q]
+            G[q][u] = G[u][q]
+
+            # Remove reference to v
+            if v in G[q]:
+                del G[q][v]
+        else:
+            # Add v's edge to u
+            G[u][q] = G[v][q]
+
+            # Redirect q's edge to v to u
+            del G[q][v]
+            G[q][u] = G[v][q]
+
+    # Remove v from G
+    del G[v]
+
+def minimum_cut_phase(G, u):
+    # Maintain mutually-exclusive sets of vertices whose union is G.V
+    A = [u]
+    not_A = []
+    G_len = 0
+    for v in G.keys():
+        G_len += 1
+        if v != u:
+            not_A.append(v)
+
+    # So we don't have to call len() during loop
+    not_A_len = G_len - 1
+
+    # Keep adding most tightly-connected vertex to A
+    mtc = u
+    prev_mtc = not_A[0]
+    while not_A_len > 1:
+        cur_max = -1
+        for u in not_A:
+            u_sum = sum_into_A(G, A, u)
+            if u_sum > cur_max:
+                cur_max = u_sum
+                mtc = u
+
+        A.append(mtc)
+        not_A.remove(mtc)
+        not_A_len -= 1
+
+        prev_mtc = mtc
+
+    mtc = not_A[0]
+    cut_of_phase = sum_into_A(G, A, mtc)
+
+    # Merge mtc and prev_mtc
+    merge(G, mtc, prev_mtc)
+
+    return cut_of_phase
+
+def stoer_wagner(G):
+    min_cut = sys.maxsize
+    while len(G) > 1:
+        cut_of_phase = minimum_cut_phase(G, 0)
+        min_cut = min(min_cut, cut_of_phase)
+
+    return min_cut
 ```
 
 #### Prim

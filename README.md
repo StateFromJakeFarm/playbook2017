@@ -3,41 +3,41 @@ Playbook for ICPC (Chico State ACM chapter)
 
 ## Index
 
-1. Environment **- 2**  
-    1. Settings **- 2**  
+1. Environment **- 1**
+    1. Settings **- 1**
 2. Algorithms **- 2**  
     1. Trees **- 2**  
         1. Binary Indexed Tree **- 2**
-        2. Lowest Common Ancestor **- 3**  
-    2. Graphs **- 4**  
-        1. Bellman Ford **- 4**
-        2. Dijkstra’s **- 5**
-        3. Dijkstra’s w/ Priority Queue **- 6**
+        2. Lowest Common Ancestor **- 2**
+    2. Graphs **- 3**
+        1. Bellman Ford **- 3**
+        2. Dijkstra’s **- 4**
+        3. Dijkstra’s w/ Priority Queue **- 5**
         4. Kruskal **- 7**
         5. Max Bipartite **- 8**
         6. Dinic’s Blocking Flow **- 9**
-        7. Min Cost Matching **- 11**
-        8. Min Cost Max Flow **- 12**
-        9. Min Cut **- 13**
-        10. Prim **- 15**
-        11. Eulerian Path **- 15**
-        12. Strongly Connected Components **- 16**
-        13. Topological Sort **- 18**
-        14. Floyd-Warshall **- 18**  
-    3. Geometry **- 19** 
-        1. Convex Hull **- 19**
-        2. Fast Fourier Transform **- 20**
-    4. Math **- 22**
-        1. Euclid Routines **- 22**
-        2. Fast Exponential **- 23**
-        3. Gauss Jordan (full pivoting) **- 23**
-        4. Primes **- 24**
-    5. String/List **- 24**  
-        1. KMP Search **- 24**
-        2. Longest Common Subsequence **- 25**
-        3. Longest Increasing Subsequence **- 25**
-3. Cheat Sheet **- 26**
-    1. Reading Input **- 26**
+        7. Min Cost Matching **- 10**
+        8. Min Cost Max Flow **- 11**
+        9. Min Cut **- 12**
+        10. Prim **- 14**
+        11. Eulerian Path **- 14**
+        12. Strongly Connected Components **- 15**
+        13. Topological Sort **- 17**
+        14. Floyd-Warshall **- 17**  
+    3. Geometry **- 18**
+        1. Convex Hull **- 18**
+        2. Fast Fourier Transform **- 19**
+    4. Math **- 21**
+        1. Euclid Routines **- 21**
+        2. Fast Exponential **- 21**
+        3. Gauss Jordan (full pivoting) **- 22**
+        4. Primes **- 22**
+    5. String/List **- 22**  
+        1. KMP Search **- 22**
+        2. Longest Common Subsequence **- 23**
+        3. Longest Increasing Subsequence **- 24**
+3. Cheat Sheet **- 24**
+    1. Reading Input **- 24**
 
 
 
@@ -55,7 +55,7 @@ syntax on
 
 This is for sums of elements of changing list. `O(n)` setup and `O(log(n))` on each update instead of `O(n)`.
 
-```py
+```python
 # Returns sum of arr[0..index]. This function assumes
 # that the array is preprocessed and partial sums of
 # array elements are stored in BITree[].
@@ -100,7 +100,7 @@ def construct(arr, n):
 
 Finds the lowest common ancestor of two nodes in a tree.
 
-```py
+```python
 # A binary tree node
 class Node:
     def __init__(self, key):
@@ -144,7 +144,7 @@ def findLCA(root, n1, n2):
 
 Single source shortest paths with negative weights.
 
-```py
+```python
 import os
 from numpy import *
 from time import time
@@ -199,7 +199,7 @@ print(min(all_shortest))
 
 Single source shortest path with no negative edges.
 
-```py
+```python
 def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
     """ calculates a shortest path tree routed in src
     """    
@@ -256,7 +256,7 @@ if __name__ == "__main__":
 
 A faster implementation of Dijkstra’s with a priority queue (`heapq`)
 
-```py
+```python
 import heapq
 
 
@@ -331,7 +331,7 @@ def dijkstra(source, pq, edges):
 
 Calculate minimum spanning-forest and its weight.
 
-```py
+```python
 parent = dict()
 rank = dict()
 
@@ -391,7 +391,7 @@ assert kruskal(graph) == minimum_spanning_tree
 
 Performs max bipartite matching (prevent nodes from sharing same destination).
 
-```py
+```python
 lass Graph:
     def __init__(self,graph):
         self.graph = graph # residual graph
@@ -453,7 +453,7 @@ print ("Maximum number of applicants that can get job is %d " % g.maxBPM())
 
 Compute maximum flow from source to target node in a graph.
 
-```py
+```python
 from queue import Queue
 
 def dinic(graph, cap, s,t):
@@ -508,7 +508,7 @@ def dinicStep(graph, lev, cap, flow, u,t, limit):
 
 Minimum cost bipartite matching via shortest augmenting paths.
 
-```py
+```python
 import sys
 import math
 
@@ -600,7 +600,7 @@ def MinCostMatching(cost):
 
 Computes the minimum cost max flow on a graph with the Edmonds and Karp algorithm.
 
-```py
+```python
 import decimal
 
 def EdmondsKarp(E, C, s, t):
@@ -644,7 +644,7 @@ def BFSEK(E, C, s, t, F, P, M, BFSq):
 
 Computes the minimum edge cut on a given graph based on the Stoer Wagner algorithm.
 
-```py
+```python
 import sys
 
 def sum_into_A(G, A, u):
@@ -731,7 +731,7 @@ def stoer_wagner(G):
 
 This builds a minimum weight spanning tree for a given graph.
 
-```py
+```python
 from pythonds.graphs import PriorityQueue, Graph, Vertex
 
 def prim(G,start):
@@ -755,7 +755,7 @@ def prim(G,start):
 
 Path that visits every edge exactly once.
 
-```py
+```python
 def eulerPath(graph):
     # counting the number of vertices with odd degree
     odd = [ x for x in graph.keys() if len(graph[x])&1 ]
@@ -786,7 +786,7 @@ def eulerPath(graph):
 
 Computes a graph of strongly connected components
 
-```py
+```python
 def strongly_connected_components_path(vertices, edges):
     identified = set()
     stack = []
@@ -896,7 +896,7 @@ def strongly_connected_components_iterative(vertices, edges):
 
 This topoligically sorts nodes from a graph.
 
-```py
+```python
 def topolgical_sort(graph_unsorted):
     # This is the list we'll return, that stores each node/edges pair
     # in topological order.
@@ -933,7 +933,7 @@ def topolgical_sort(graph_unsorted):
 
 Computes an all-pairs shortest path on a given graph.
 
-```py
+```python
 def floydwarshall(graph):
 
     # Initialize dist and pred:
@@ -984,7 +984,7 @@ for v in dist: print "%s: %s" % (v, dist[v])
 
 Computes the positions of points for the convex hull of a set of given points. The polygon drawing the smallest area containing given points.
 
-```py
+```python
 def convex_hull(points):
     """Computes the convex hull of a set of 2D points.
 
@@ -1033,7 +1033,7 @@ assert convex_hull([(i//10, i%10) for i in range(100)]) == [(0, 0), (9, 0), (9, 
 
 #### Fast Fourier Transform
 
-```py
+```python
 import math
 
 def complex_dft(xr, xi, n):
@@ -1136,7 +1136,7 @@ if __name__ == "__main__":
 
 A set of routines to do common math operations.
 
-```py
+```python
 # a % b positive
 def mod(a, b):
     return ((a%b) + b) % b
@@ -1164,7 +1164,7 @@ def powermod(a, b, m):
 
 #### Fast Exponential
 
-```py
+```python
 def power(n, k):
     ret = 1
     while k:
@@ -1177,7 +1177,7 @@ def power(n, k):
 
 #### Gauss Jordan (full pivoting)
 
-```py
+```python
 def gauss_jordan(m, eps = 1.0/(10**10)):
     """Puts given matrix (2D array) into the Reduced Row Echelon Form.
          Returns True if successful, False if 'm' is singular.
@@ -1209,7 +1209,7 @@ def gauss_jordan(m, eps = 1.0/(10**10)):
 
 #### Primes
 
-```py
+```python
 def is_prime(number):
     for i in range(2,1+int(math.sqrt(number))):
         if number % i == 0:
@@ -1229,7 +1229,7 @@ for i in range(3,10000,2):
 
 Linear runtime complexity string search.
 
-```py
+```python
 def KnuthMorrisPratt(text, pattern):
 
     """Yields all starting positions of copies of the pattern in the text.
@@ -1265,7 +1265,7 @@ the match that caused the yield."""
 
 #### Longest Common Subsequence
 
-```py
+```python
 def lcs(a, b):
     lengths = [[0 for j in range(len(b)+1)] for i in range(len(a)+1)]
     # row 0 and column 0 are initialized to 0 already
@@ -1294,7 +1294,7 @@ def lcs(a, b):
 
 #### Longest Increasing Subsequence
 
-```py
+```python
 def longest_increasing_subsequence(X):
     """Returns the Longest Increasing Subsequence in the Given List/Array"""
     N = len(X)
@@ -1332,12 +1332,12 @@ def longest_increasing_subsequence(X):
 
 Reading a pair of space separated values `n` and `k`:
 
-```py
+```python
 (n,k) = [int(x) for x in input().split()]
 ```
 
 Reading a list of values
 
-```py
+```python
 list = [int(x) for x in input().split()]
 ```

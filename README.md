@@ -36,9 +36,10 @@ Playbook for ICPC (Chico State ACM chapter)
         1. KMP Search **- 22**
         2. Longest Common Subsequence **- 23**
         3. Longest Increasing Subsequence **- 24**
-    6. CSP **- 24**
-3. Cheat Sheet **- 25**
-    1. Reading Input **- 25**
+    6. Other **- 24**
+        1. CSP **- 24**
+3. Cheat Sheet **- 27**
+    1. Reading Input **- 27**
 
 
 
@@ -1326,6 +1327,9 @@ def longest_increasing_subsequence(X):
         k = P[k]
     return S[::-1]
 ```
+
+## Other
+
 ### CSP
 ```python
 """

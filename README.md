@@ -70,8 +70,8 @@ def getsum(BITTree,i):
         # Move index to parent node in getSum View
         i -= i & (-i)
     return s
- 
-# Updates a node in Binary Index Tree (BITree) at given index in BITree. 
+
+# Updates a node in Binary Index Tree (BITree) at given index in BITree.
 # The given value 'val' is added to BITree[i] and all of its ancestors in tree.
 def updatebit(BITTree , n , i ,v):
     # index in BITree[] is 1 more than the index in arr[]
@@ -82,7 +82,7 @@ def updatebit(BITTree , n , i ,v):
         BITTree[i] += v
         # Update index to that of parent in update View
         i += i & (-i)
- 
+
 # Constructs and returns a Binary Indexed Tree for given array of size n.
 def construct(arr, n):
     # Create and initialize BITree[] as 0
@@ -104,10 +104,10 @@ Finds the lowest common ancestor of two nodes in a tree.
 # A binary tree node
 class Node:
     def __init__(self, key):
-        self.key = key 
+        self.key = key
         self.left = None
         self.right = None
-     
+
 # This function returns pointer to LCA of two given
 # values n1 and n2
 # This function assumes that n1 and n2 are present in
@@ -122,18 +122,18 @@ def findLCA(root, n1, n2):
     #  the presence by returning root (Note that if a key is
     #  ancestor of other, then the ancestor key becomes LCA
     if root.key == n1 or root.key == n2:
-        return root 
- 
+        return root
+
     # Look for keys in left and right subtrees
-    left_lca = findLCA(root.left, n1, n2) 
+    left_lca = findLCA(root.left, n1, n2)
     right_lca = findLCA(root.right, n1, n2)
- 
+
     # If both of the above calls return Non-NULL, then one key
     # is present in once subtree and other is present in other,
     # So this node is the LCA
     if left_lca and right_lca:
-        return root 
- 
+        return root
+
     # Otherwise check if left subtree or right subtree is LCA
     return left_lca if left_lca is not None else right_lca
 ```
@@ -173,24 +173,24 @@ for s in range(0, vertices):
     cache = initialise_cache(vertices, s)
     for i in range(1, vertices):
         previous_cache = cache[:]
-                
+
         combined = (previous_cache.T + adjacency_matrix).min(axis=1)
         cache = minimum(previous_cache, combined)
-        
+
         if(alltrue(cache == previous_cache)):
             break;
-    
+
     # checking for negative cycles
     previous_cache = cache[:]
     combined = (previous_cache.T + adjacency_matrix).min(axis=1)
     cache = minimum(previous_cache, combined)
-    
+
     print("s: " + str(s) + " done " + str(time() - start_time))
     if(not alltrue(cache == previous_cache)):
         raise Exception("negative cycle detected")
-            
+
     shortest_paths.append([s, cache])
-    
+
 all_shortest = reduce(lambda x, y: concatenate((x,y), axis=1), map(lambda x: x[1], shortest_paths))
 print(min(all_shortest))
 ```
@@ -216,10 +216,10 @@ def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
         while pred != None:
             path.append(pred)
             pred=predecessors.get(pred,None)
-        print('shortest path: '+str(path)+" cost="+str(distances[dest])) 
+        print('shortest path: '+str(path)+" cost="+str(distances[dest]))
     else :     
         # if it is the initial  run, initializes the cost
-        if not visited: 
+        if not visited:
             distances[src]=0
         # visit the neighbors
         for neighbor in graph[src] :
@@ -239,7 +239,7 @@ def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
                 unvisited[k] = distances.get(k,float('inf'))        
         x=min(unvisited, key=unvisited.get)
         dijkstra(graph,x,dest,visited,distances,predecessors)
-        
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     #unittest.main()
@@ -258,57 +258,57 @@ A faster implementation of Dijkstra’s with a priority queue (`heapq`)
 
 ```py
 import heapq
- 
- 
+
+
 class PriorityQueue(object):
     """Priority queue based on heap, capable of inserting a new node with
     desired priority, updating the priority of an existing node and deleting
     an abitrary node while keeping invariant"""
- 
+
     def __init__(self, heap=[]):
         """if 'heap' is not empty, make sure it's heapified"""
- 
+
         heapq.heapify(heap)
         self.heap = heap
         self.entry_finder = dict({i[-1]: i for i in heap})
         self.REMOVED = '<remove_marker>'
- 
+
     def insert(self, node, priority=0):
         """'entry_finder' bookkeeps all valid entries, which are bonded in
         'heap'. Changing an entry in either leads to changes in both."""
- 
+
         if node in self.entry_finder:
             self.delete(node)
         entry = [priority, node]
         self.entry_finder[node] = entry
         heapq.heappush(self.heap, entry)
- 
+
     def delete(self, node):
         """Instead of breaking invariant by direct removal of an entry, mark
         the entry as "REMOVED" in 'heap' and remove it from 'entry_finder'.
         Logic in 'pop()' properly takes care of the deleted nodes."""
- 
+
         entry = self.entry_finder.pop(node)
         entry[-1] = self.REMOVED
         return entry[0]
- 
+
     def pop(self):
         """Any popped node marked by "REMOVED" does not return, the deleted
         nodes might be popped or still in heap, either case is fine."""
- 
+
         while self.heap:
             priority, node = heapq.heappop(self.heap)
             if node is not self.REMOVED:
                 del self.entry_finder[node]
                 return priority, node
         raise KeyError('pop from an empty priority queue')
- 
- 
+
+
 def dijkstra(source, pq, edges):
     """Returns the shortest paths from the source to all other nodes.
     'edges' are in form of {head: [(tail, edge_dist), ...]}, contain all
     edges of the graph, both directions if undirected."""
- 
+
     size = len(pq.heap) + 1
     processed =
     uncharted = set([i[1] for i in pq.heap])
@@ -397,30 +397,30 @@ lass Graph:
         self.graph = graph # residual graph
         self.ppl = len(graph)
         self.jobs = len(graph[0])
- 
+
     # A DFS based recursive function that returns true if a
     # matching for vertex u is possible
     def bpm(self, u, matchR, seen):
- 
+
         # Try every job one by one
         for v in range(self.jobs):
- 
+
             # If applicant u is interested in job v and v is
             # not seen
             if self.graph[u][v] and seen[v] == False:
                 seen[v] = True # Mark v as visited
- 
+
                 '''If job 'v' is not assigned to an applicant OR
-                previously assigned applicant for job v (which is matchR[v]) 
-                has an alternate job available. 
-                Since v is marked as visited in the above line, matchR[v] 
+                previously assigned applicant for job v (which is matchR[v])
+                has an alternate job available.
+                Since v is marked as visited in the above line, matchR[v]
                 in the following recursive call will not get job 'v' again'''
                 if matchR[v] == -1 or self.bpm(matchR[v], matchR, seen):
                     matchR[v] = u
                     return True
         return False
- 
-    # Returns maximum number of matching 
+
+    # Returns maximum number of matching
     def maxBPM(self):
         '''An array to keep track of the applicants assigned to
         jobs. The value of matchR[i] is the applicant number
@@ -435,17 +435,17 @@ lass Graph:
             if self.bpm(i, matchR, seen):
                 result += 1
         return result
- 
- 
+
+
 bpGraph =[[0, 1, 1, 0, 0, 0],
         [1, 0, 0, 1, 0, 0],
         [0, 0, 1, 0, 0, 0],
         [0, 0, 1, 1, 0, 0],
         [0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 1]]
- 
+
 g = Graph(bpGraph)
- 
+
 print ("Maximum number of applicants that can get job is %d " % g.maxBPM())
 ```
 
@@ -457,7 +457,7 @@ Compute maximum flow from source to target node in a graph.
 from queue import Queue
 
 def dinic(graph, cap, s,t):
-    """ Find maximum flow from s to t. 
+    """ Find maximum flow from s to t.
     returns value and matrix of flow.
     graph is list of adjacency lists, G[u]=neighbors of u
     cap is the capacity matrix
@@ -510,6 +510,91 @@ Minimum cost bipartite matching via shortest augmenting paths.
 
 ```py
 #some code here
+import sys
+import math
+
+def MinCostMatching(cost):
+    n = len(cost)
+    u = [0]*n
+    v = [0]*n
+
+    for i in range(0, n):
+        u[i] = min(cost[i])
+    for i in range(0, n):
+        v[i] = cost[0][i] - u[0]
+        for j in range(0, n):
+            v[i] = min(cost[j][i] - u[j], v[i])
+
+    lmate = [-1]*n
+    rmate = [-1]*n
+    mated = 0;
+    for i in range(0, n):
+        for j in range(0, n):
+            if rmate[j] == -1:
+                if abs(cost[i][j] - u[i] - v[j]) < sys.float_info.epsilon:
+                    lmate[i] = j
+                    rmate[j] = i
+                    mated += 1
+                    break
+
+    dist = [0]*n
+    dad = []
+    seen = []
+
+    s = 0
+    while mated < n:
+        while lmate[s] != -1:
+            s += 1
+
+        dad = [-1]*n
+        seen = [False]*n
+
+        for k in range(0, n):
+            dist[k] = cost[s][k] - u[s] - v[k]
+
+        j = 0
+        while True:
+            j = -1
+            for k in range(0, n):
+                if not seen[k]:
+                    if j == -1 or dist[k] < dist[j]:
+                        j = k
+            seen[j] = True
+
+            if rmate[j] == -1:
+                break
+
+            i = rmate[j]
+            for k in range(0, n):
+                if not seen[k]:
+                    new_dist = dist[j] + cost[i][k] - u[i] - v[k]
+                    if dist[k] > new_dist:
+                        dist[k] = new_dist
+                        dad[k] = j
+
+        for k in range(0, n):
+            if not(k == j or not seen[k]):
+                i = rmate[k]
+                v[k] += dist[k] - dist[j]
+                u[i] -= dist[k] - dist[j]
+        u[s] += dist[j]
+
+        while dad[j] >= 0:
+            d = dad[j]
+            rmate[j] = rmate[d]
+            lmate[rmate[j]] = j
+            j = d
+
+        rmate[j] = s
+        lmate[s] = j
+        mated += 1
+
+    value = 0
+    print (rmate, lmate)
+    for i in range(0, n):
+        print(cost[i][lmate[i]])
+        value += cost[i][lmate[i]]
+    return value
 ```
 
 #### Min Cost Max Flow
@@ -679,10 +764,10 @@ def eulerPath(graph):
 
     if len(odd)>3:
         return None
-    
+
     stack = [ odd[0] ]
     path = []
-    
+
     # main algorithm
     while stack:
         v = stack[-1]
@@ -694,7 +779,7 @@ def eulerPath(graph):
             del graph[v][0]
         else:
             path.append( stack.pop() )
-    
+
     return path
 ```
 
@@ -851,7 +936,7 @@ Computes an all-pairs shortest path on a given graph.
 
 ```py
 def floydwarshall(graph):
- 
+
     # Initialize dist and pred:
     # copy graph into dist, but add infinite where there is
     # no edge, and 0 in the diagonal
@@ -867,7 +952,7 @@ def floydwarshall(graph):
         for neighbor in graph[u]:
             dist[u][neighbor] = graph[u][neighbor]
             pred[u][neighbor] = u
- 
+
     for t in graph:
         # given dist u to v, check if path u - t - v is shorter
         for u in graph:
@@ -876,18 +961,18 @@ def floydwarshall(graph):
                 if newdist < dist[u][v]:
                     dist[u][v] = newdist
                     pred[u][v] = pred[t][v] # route new path through t
- 
+
     return dist, pred
- 
- 
- 
+
+
+
 graph = {0 : {1:6, 2:8},
          1 : {4:11},
          2 : {3: 9},
          3 : {},
          4 : {5:3},
          5 : {2: 7, 3:4}}
- 
+
 dist, pred = floydwarshall(graph)
 print "Predecesors in shortest path:"
 for v in pred: print "%s: %s" % (v, pred[v])
@@ -924,7 +1009,7 @@ def convex_hull(points):
     def cross(o, a, b):
         return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
 
-    # Build lower hull 
+    # Build lower hull
     lower = []
     for p in points:
         while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
@@ -939,7 +1024,7 @@ def convex_hull(points):
         upper.append(p)
 
     # Concatenation of the lower and upper hulls gives the convex hull.
-    # Last point of each list is omitted because it is repeated at the beginning of the other list. 
+    # Last point of each list is omitted because it is repeated at the beginning of the other list.
     return lower[:-1] + upper[:-1]
 
 
@@ -1031,7 +1116,7 @@ if __name__ == "__main__":
     print "complet_dft(): n=", n
     print "rex: "
     print_list([int(e) for e in rex])
-    print "imx: " 
+    print "imx: "
     print_list([int(e) for e in imx])
 
     fr = x[:]
@@ -1041,7 +1126,7 @@ if __name__ == "__main__":
     print "fft_basic(): n=", n
     print "rex: "
     print_list([int(e) for e in fr])
-    print "imx: " 
+    print "imx: "
     print_list([int(e) for e in fi])
 
 ```
@@ -1077,7 +1162,7 @@ def powermod(a, b, m):
         b //= 2
     return ret
 ```
-    
+
 #### Fast Exponential
 
 ```py
@@ -1226,14 +1311,14 @@ def longest_increasing_subsequence(X):
                lo = mid+1
            else:
                hi = mid-1
- 
+
        newL = lo
        P[i] = M[newL-1]
        M[newL] = i
- 
+
        if (newL > L):
            L = newL
- 
+
     S = []
     k = M[L]
     for i in range(L-1, -1, -1):

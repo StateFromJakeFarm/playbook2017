@@ -16,26 +16,28 @@ Playbook for ICPC (Chico State ACM chapter)
         4. Kruskal **- 7**
         5. Max Bipartite **- 8**
         6. Dinic’s Blocking Flow **- 9**
-        7. Min Cost Matching **- 10**
-        8. Min Cost Max Flow **- 10**
-        9. Min Cut **- 11**
-        10. Prim **- 11**
-        11. Eulerian Path **- 11**
-        12. Strongly Connected Components **- 12**
-        13. Topological Sort **- 14**
-        14. Floyd-Warshall **- 15**  
-    3. Geometry **- 15**  
-        1. Convex Hull **- 15**
-        2. Fast Fourier Transform **- 16**  
-    4. Math **- 18**  
-        1. Euclid Routines **- 18**
-        2. Primes **- 20**  
-    5. String/List **- 20**  
-        1. KMP Search **- 20**
-        2. Longest Common Subsequence **- 20**
-        3. Longest Increasing Subsequence **- 21**  
-3. Cheat Sheet **- 22**  
-    1. Reading Input **- 22**
+        7. Min Cost Matching **- 11**
+        8. Min Cost Max Flow **- 12**
+        9. Min Cut **- 13**
+        10. Prim **- 15**
+        11. Eulerian Path **- 15**
+        12. Strongly Connected Components **- 16**
+        13. Topological Sort **- 18**
+        14. Floyd-Warshall **- 18**  
+    3. Geometry **- 19** 
+        1. Convex Hull **- 19**
+        2. Fast Fourier Transform **- 20**
+    4. Math **- 22**
+        1. Euclid Routines **- 22**
+        2. Fast Exponential **- 23**
+        3. Gauss Jordan (full pivoting) **- 23**
+        4. Primes **- 24**
+    5. String/List **- 24**  
+        1. KMP Search **- 24**
+        2. Longest Common Subsequence **- 25**
+        3. Longest Increasing Subsequence **- 25**
+3. Cheat Sheet **- 26**
+    1. Reading Input **- 26**
 
 
 
@@ -507,7 +509,6 @@ def dinicStep(graph, lev, cap, flow, u,t, limit):
 Minimum cost bipartite matching via shortest augmenting paths.
 
 ```py
-#some code here
 import sys
 import math
 

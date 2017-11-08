@@ -34,8 +34,6 @@ Playbook for ICPC (Chico State ACM chapter)
         1. KMP Search **- 20**
         2. Longest Common Subsequence **- 20**
         3. Longest Increasing Subsequence **- 21**  
-    6. Other **- 22**  
-        1. Constraint Satisfaction Problems **- 22**  
 3. Cheat Sheet **- 22**  
     1. Reading Input **- 22**
 
@@ -1326,10 +1324,6 @@ def longest_increasing_subsequence(X):
         k = P[k]
     return S[::-1]
 ```
-
-### Other
-
-#### Constraint Satisfaction Problems
 
 ## Cheatsheet
 
